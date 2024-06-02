@@ -1,0 +1,37 @@
+--- clib/src/common/clib-package.c	2020-09-08 02:51:23.000000000 +0300
++++ clib_patched/src/common/clib-package.c	2024-06-03 00:02:40.195884763 +0300
+@@ -646,14 +646,21 @@
+ #ifdef HAVE_PTHREADS
+     pthread_mutex_unlock(&lock.mutex);
+ #endif
+-  } else {
++  } 
++  else {
+   download:
++  if(res){
++    http_get_free(res);
++    json = NULL;
++    res = NULL;
++  }
+ #ifdef HAVE_PTHREADS
+     pthread_mutex_unlock(&lock.mutex);
+ #endif
+     if (retries-- <= 0) {
+       goto error;
+-    } else {
++    } 
++    else {
+ #ifdef HAVE_PTHREADS
+       init_curl_share();
+       _debug("GET %s", json_url);
+@@ -1380,7 +1387,9 @@
+ #ifdef HAVE_PTHREADS
+     pthread_mutex_lock(&lock.mutex);
+ #endif
+-    hash_set(visited_packages, strdup(pkg->name), "t");
++    if (!hash_has(visited_packages, pkg->name)) {
++      hash_set(visited_packages, strdup(pkg->name), "t");
++    }
+ #ifdef HAVE_PTHREADS
+     pthread_mutex_unlock(&lock.mutex);
+ #endif
