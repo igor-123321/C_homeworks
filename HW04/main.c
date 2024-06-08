@@ -74,7 +74,8 @@ int main(int argc, char *argv[]){
  
   chunk.memory = malloc(1);  /* grown as needed by the realloc above */
   chunk.size = 0;    /* no data at this point */
- 
+  long http_code = 0; //server resp status code
+
   curl_global_init(CURL_GLOBAL_ALL);
  
   /* init the curl session */
@@ -94,20 +95,26 @@ int main(int argc, char *argv[]){
      field, so we provide one */
   curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0");
  
-  /* get it! */
+   /* get it! */
   res = curl_easy_perform(curl_handle);
- 
+  //get status code
+  curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &http_code);
+
   /* check for connection errors */
   if(res != CURLE_OK) {
     printf("curl_easy_perform() failed: %s\n",
-            curl_easy_strerror(res));
+    curl_easy_strerror(res));
   }
   else {
+    if (http_code != 200) {
+      printf("Город не найден!\n");
+      return 0;
+    }  
     json_value * jarr = json_parse(chunk.memory, chunk.size);
     if(jarr == NULL){
       printf("Unable to parse data\n");
       return 1;
-    }
+  }
     json_value * weather_info;
     char * city;
     char * weather;
