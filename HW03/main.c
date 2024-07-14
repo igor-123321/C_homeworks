@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     if (cur_ch != ' ' && cur_ch != '\t' && cur_ch != '\n' && cur_ch != '.' &&
         cur_ch != '?' && cur_ch != '!' && cur_ch != ',' && cur_ch != ':' &&
         cur_ch != ';') {
-      if(i <=  MAX_LENGTH){
+      if(i <  MAX_LENGTH){
         word[i] = cur_ch;
         i++;
       } else {
