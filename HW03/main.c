@@ -28,8 +28,12 @@ int main(int argc, char *argv[]) {
     if (cur_ch != ' ' && cur_ch != '\t' && cur_ch != '\n' && cur_ch != '.' &&
         cur_ch != '?' && cur_ch != '!' && cur_ch != ',' && cur_ch != ':' &&
         cur_ch != ';') {
-      word[i] = cur_ch;
-      i++;
+      if(i <=  MAX_LENGTH){
+        word[i] = cur_ch;
+        i++;
+      } else {
+        printf("The maximum word length has been exceeded");
+      }
     } else {
       word[i] = '\0';
       i = 0;
