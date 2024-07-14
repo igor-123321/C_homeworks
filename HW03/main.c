@@ -1,56 +1,57 @@
 #include "hashtable.h"
-#include <stdio.h>
 #include <locale.h>
-#include <string.h>
-//Максимальная длинна слова
+#include <stdio.h>
+#include <bsd/string.h>
+//Максимальная длина слова
 #define MAX_LENGTH 45
-int main(int argc, char *argv[]){
-    if(argc != 2) 
-    {
-        printf("Use main <path_to_text_file>\n");
-        return 0;
+//Начальный размер таблицы
+#define START_TABLE_SIZE 10
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    printf("Use main <path_to_text_file>\n");
+    return 0;
+  }
+
+  FILE *textf = fopen(argv[1], "r");
+  // FILE *textf = fopen("text.txt", "r");
+  if (textf == NULL) {
+    // perror("text.txt");
+    perror(argv[1]);
+    return 1;
+  }
+  char cur_ch;
+  int i = 0;
+  char word[MAX_LENGTH] = "";
+  hashtable *mytable = hashtable_create(START_TABLE_SIZE);
+
+  while ((cur_ch = fgetc(textf)) != EOF) {
+    if (cur_ch != ' ' && cur_ch != '\t' && cur_ch != '\n' && cur_ch != '.' &&
+        cur_ch != '?' && cur_ch != '!' && cur_ch != ',' && cur_ch != ':' &&
+        cur_ch != ';') {
+      word[i] = cur_ch;
+      i++;
+    } else {
+      word[i] = '\0';
+      i = 0;
+      if (strlen(word) == 0) {
+        continue;
+      }
+      // if value = 0 then just add word
+      int word_count = hashtable_get(mytable, word);
+      if (!word_count) {
+        mytable = hashtable_insert(mytable, word, 1);
+      } else {
+        word_count++;
+        hashtable_modify(mytable, word, word_count);
+      }
     }
-    
-    FILE *textf = fopen(argv[1], "r");
-    //FILE *textf = fopen("text.txt", "r");
-    if(textf == NULL){
-        //perror("text.txt");
-        perror(argv[1]);
-        return 1;
+  }
+  fclose(textf);
+  for (size_t j = 0; j < mytable->size; ++j) {
+    if (mytable->element[j].key != NULL) {
+      printf("Word %s: word_count %d.\n", mytable->element[j].key,
+             mytable->element[j].value);
     }
-    char ch;
-    int i = 0;
-    char word[MAX_LENGTH]="";
-    hashtable *mytable = hashtable_create(10);
-    
-    while((ch = fgetc(textf)) != EOF){
-        if(ch != ' ' && ch != '\t' && ch != '\n' && ch != '.' && ch != '?' && ch != '!' && ch != ',' && ch != ':' && ch != ';')
-        { 
-            word[i]=ch;
-            i++;
-        }
-        else{
-            word[i]='\0';
-            i = 0;
-            if(strlen(word) == 0){
-                continue;
-            }
-            //if value = 0 then just add word
-            int count = hashtable_get(mytable,word);
-            if(!count){
-                mytable = hashtable_insert(mytable, word, 1);
-            }
-            else{
-                count++;
-                hashtable_modify(mytable, word, count);
-            }
-        }
-    }
-    fclose(textf);
-    for(size_t j=0; j < mytable->size; j++){
-        if(mytable->element[j].key != NULL){
-            printf("Word %s: count %d.\n", mytable->element[j].key, mytable->element[j].value);
-        }
-    }
-    hashtable_free(mytable);
+  }
+  hashtable_free(mytable);
 }
