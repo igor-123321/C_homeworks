@@ -65,6 +65,14 @@ char *concat(int count, ...) {
   return merged;
 }
 
+void cleanup(CURL *curl_handle, struct MemoryStruct chunk, char* url){
+  curl_easy_cleanup(curl_handle);
+  free(chunk.memory);
+  free(url);
+  /* we are done with libcurl, so clean it up */
+  curl_global_cleanup();
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     printf("Введите ./<имя_программы> <город>\n");
@@ -111,50 +119,46 @@ int main(int argc, char *argv[]) {
   } else {
     if (http_code != HTTP_OK) {
       printf("Город не найден!\n");
-      return 0;
-    }
-    json_value *jarr = json_parse(chunk.memory, chunk.size);
-    if (jarr == NULL) {
-      printf("Unable to parse data\n");
-      return 1;
-    }
-    json_value *weather_info;
-    char *city;
-    char *weather;
-    char *temp;
-    char *windspeedKmph;
-    char *winddirDirection;
+    } else {
+      json_value *jarr = json_parse(chunk.memory, chunk.size);
+      if (jarr == NULL) {
+        printf("Unable to parse data\n");
+        cleanup(curl_handle, chunk, url);
+        return 1;
+      }
+      json_value *weather_info;
+      char *city;
+      char *weather;
+      char *temp;
+      char *windspeedKmph;
+      char *winddirDirection;
 
-    weather_info = jarr->u.object.values[0].value->u.array.values[0];
-    weather = weather_info->u.object.values[JSON_WEATHER_LANG]
-                  .value->u.array.values[0]
-                  ->u.object.values[0]
-                  .value->u.string.ptr;
-    temp =
-        weather_info->u.object.values[JSON_WEATHER_TEMP_C].value->u.string.ptr;
-    windspeedKmph = weather_info->u.object.values[JSON_WEATHER_WINDSPEEDKMPH]
-                        .value->u.string.ptr;
-    winddirDirection =
-        weather_info->u.object.values[JSON_WEATHER_WINDDIR].value->u.string.ptr;
-    city = jarr->u.object.values[1]
-               .value->u.array.values[0]
-               ->u.object.values[0]
-               .value->u.array.values[0]
-               ->u.object.values[0]
-               .value->u.string.ptr;
-    printf("Прогноз погоды на текущий день по городу %s:\n"
-           "Текстовое описание погоды: %s\n"
-           "Направление ветра: %s \n"
-           "Скорость ветра: %s км/ч\n"
-           "Температура: %s градусов Цельсия\n",
-           city, weather, winddirDirection, windspeedKmph, temp);
-    json_value_free(jarr);
+      weather_info = jarr->u.object.values[0].value->u.array.values[0];
+      weather = weather_info->u.object.values[JSON_WEATHER_LANG]
+                    .value->u.array.values[0]
+                    ->u.object.values[0]
+                    .value->u.string.ptr;
+      temp =
+          weather_info->u.object.values[JSON_WEATHER_TEMP_C].value->u.string.ptr;
+      windspeedKmph = weather_info->u.object.values[JSON_WEATHER_WINDSPEEDKMPH]
+                          .value->u.string.ptr;
+      winddirDirection =
+          weather_info->u.object.values[JSON_WEATHER_WINDDIR].value->u.string.ptr;
+      city = jarr->u.object.values[1]
+                 .value->u.array.values[0]
+                 ->u.object.values[0]
+                 .value->u.array.values[0]
+                 ->u.object.values[0]
+                 .value->u.string.ptr;
+      printf("Прогноз погоды на текущий день по городу %s:\n"
+             "Текстовое описание погоды: %s\n"
+             "Направление ветра: %s \n"
+             "Скорость ветра: %s км/ч\n"
+             "Температура: %s градусов Цельсия\n",
+             city, weather, winddirDirection, windspeedKmph, temp);
+      json_value_free(jarr);
+    }  
   }
-  // Clean up!
-  curl_easy_cleanup(curl_handle);
-  free(chunk.memory);
-  free(url);
-  /* we are done with libcurl, so clean it up */
-  curl_global_cleanup();
+  cleanup(curl_handle, chunk, url);
   return 0;
 }
