@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
   }
   char cur_ch;
   int i = 0;
-  char word[MAX_LENGTH] = "";
+  char word[MAX_LENGTH+1] = "";
   hashtable *mytable = hashtable_create(START_TABLE_SIZE);
 
   while ((cur_ch = fgetc(textf)) != EOF) {

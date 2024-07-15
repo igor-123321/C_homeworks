@@ -20,13 +20,12 @@ static long long hash(const char *key, size_t size) {
 hashtable *hashtable_create(size_t size) {
   hashtable *table = malloc(sizeof(hashtable));
   if (table == NULL) {
-    free(table);
     return NULL;
   }
   table->size = size;
   table->element = calloc(sizeof(element_hashtable), table->size);
   if (table->element == NULL) {
-    free(table->element);
+    free(table);
     return NULL;
   }
   return table;
@@ -67,7 +66,7 @@ hashtable *hashtable_insert(hashtable *table, const char *key, int value) {
   table->element[indx].key = calloc(strlen(key) + 1, sizeof(char));
   if (table->element[indx].key == NULL) {
     printf("Problem with calloc for key\n");
-    free(table->element[indx].key);
+    hashtable_free(table);
     return NULL;
   }
   table->element[indx].value = value;
