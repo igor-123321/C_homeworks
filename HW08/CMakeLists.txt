@@ -7,5 +7,6 @@ set(CMAKE_BUILD_TYPE "Debug")
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
 
-add_executable (hw08 listdir.c)
+add_executable (hw08 main.c)
+#add_executable (hw08 treetest3.c)
 target_link_libraries (hw08 PRIVATE PkgConfig::GTK4)

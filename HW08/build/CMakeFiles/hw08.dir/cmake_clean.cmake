@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/hw08.dir/listdir.c.o"
-  "CMakeFiles/hw08.dir/listdir.c.o.d"
+  "CMakeFiles/hw08.dir/main.c.o"
+  "CMakeFiles/hw08.dir/main.c.o.d"
   "hw08"
   "hw08.pdb"
 )

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/igor/homework/HW08/listdir.c" "CMakeFiles/hw08.dir/listdir.c.o" "gcc" "CMakeFiles/hw08.dir/listdir.c.o.d"
+  "/home/igor/homework/HW08/main.c" "CMakeFiles/hw08.dir/main.c.o" "gcc" "CMakeFiles/hw08.dir/main.c.o.d"
   )
 
 # Targets to which this target links.

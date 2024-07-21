@@ -69,28 +69,28 @@ include CMakeFiles/hw08.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/hw08.dir/flags.make
 
-CMakeFiles/hw08.dir/listdir.c.o: CMakeFiles/hw08.dir/flags.make
-CMakeFiles/hw08.dir/listdir.c.o: ../listdir.c
-CMakeFiles/hw08.dir/listdir.c.o: CMakeFiles/hw08.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/igor/homework/HW08/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/hw08.dir/listdir.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/hw08.dir/listdir.c.o -MF CMakeFiles/hw08.dir/listdir.c.o.d -o CMakeFiles/hw08.dir/listdir.c.o -c /home/igor/homework/HW08/listdir.c
+CMakeFiles/hw08.dir/main.c.o: CMakeFiles/hw08.dir/flags.make
+CMakeFiles/hw08.dir/main.c.o: ../main.c
+CMakeFiles/hw08.dir/main.c.o: CMakeFiles/hw08.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/igor/homework/HW08/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/hw08.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/hw08.dir/main.c.o -MF CMakeFiles/hw08.dir/main.c.o.d -o CMakeFiles/hw08.dir/main.c.o -c /home/igor/homework/HW08/main.c
 
-CMakeFiles/hw08.dir/listdir.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/hw08.dir/listdir.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/igor/homework/HW08/listdir.c > CMakeFiles/hw08.dir/listdir.c.i
+CMakeFiles/hw08.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/hw08.dir/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/igor/homework/HW08/main.c > CMakeFiles/hw08.dir/main.c.i
 
-CMakeFiles/hw08.dir/listdir.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/hw08.dir/listdir.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/igor/homework/HW08/listdir.c -o CMakeFiles/hw08.dir/listdir.c.s
+CMakeFiles/hw08.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/hw08.dir/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/igor/homework/HW08/main.c -o CMakeFiles/hw08.dir/main.c.s
 
 # Object files for target hw08
 hw08_OBJECTS = \
-"CMakeFiles/hw08.dir/listdir.c.o"
+"CMakeFiles/hw08.dir/main.c.o"
 
 # External object files for target hw08
 hw08_EXTERNAL_OBJECTS =
 
-hw08: CMakeFiles/hw08.dir/listdir.c.o
+hw08: CMakeFiles/hw08.dir/main.c.o
 hw08: CMakeFiles/hw08.dir/build.make
 hw08: /usr/lib/x86_64-linux-gnu/libgtk-4.so
 hw08: /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so
