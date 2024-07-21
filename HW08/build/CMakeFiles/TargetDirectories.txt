@@ -1,3 +1,0 @@
-/home/igor/homework/HW08/build/CMakeFiles/hw08.dir
-/home/igor/homework/HW08/build/CMakeFiles/edit_cache.dir
-/home/igor/homework/HW08/build/CMakeFiles/rebuild_cache.dir
