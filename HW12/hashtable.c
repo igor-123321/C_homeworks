@@ -1,8 +1,8 @@
 #include "hashtable.h"
+#include <bsd/string.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <bsd/string.h>
 
 static size_t hash(const char *key, size_t size) {
   if (key == NULL) {
@@ -18,12 +18,12 @@ static size_t hash(const char *key, size_t size) {
 }
 
 hashtable *hashtable_create(size_t size) {
-  hashtable *table = malloc(sizeof(hashtable));
+  hashtable *table = (hashtable *) malloc(sizeof(hashtable));
   if (table == NULL) {
     return NULL;
   }
   table->size = size;
-  table->element = calloc(sizeof(element_hashtable), table->size);
+  table->element = (element_hashtable *)calloc(sizeof(element_hashtable), table->size);
   if (table->element == NULL) {
     free(table);
     return NULL;
@@ -44,24 +44,25 @@ static hashtable *hashtable_expand(hashtable *table) {
   return newt;
 }
 
-//inc_val - насколько увеличиваем значение (в случае счетчика на 1, в случае объема данных - на размер запроса)
-void filltable(hashtable ** table, const char *key, size_t inc_val){
-    if (hashtable_checkkey(*table, key)) {
-            size_t count = hashtable_get(*table, key);
-            count += inc_val;
-            hashtable_modify(*table, key, count);
-        }
-        else {
-            *table = hashtable_insert(*table, key, inc_val);
-        }
+// inc_val - насколько увеличиваем значение (в случае счетчика на 1, в случае
+// объема данных - на размер запроса)
+void filltable(hashtable **table, const char *key, size_t inc_val) {
+  if (hashtable_checkkey(*table, key)) {
+    size_t count = hashtable_get(*table, key);
+    count += inc_val;
+    hashtable_modify(*table, key, count);
+  } else {
+    *table = hashtable_insert(*table, key, inc_val);
+  }
 }
 
-void hashtable_merge(hashtable **outtable, hashtable *inputtable){
+void hashtable_merge(hashtable **outtable, hashtable *inputtable) {
   for (size_t i = 0; i < inputtable->size; ++i) {
     if (inputtable->element[i].key != NULL) {
-      filltable(outtable, inputtable->element[i].key, inputtable->element[i].value);
+      filltable(outtable, inputtable->element[i].key,
+                inputtable->element[i].value);
     }
-  } 
+  }
 }
 
 hashtable *hashtable_insert(hashtable *table, const char *key, size_t value) {
@@ -83,7 +84,7 @@ hashtable *hashtable_insert(hashtable *table, const char *key, size_t value) {
       return (hashtable_insert(hashtable_expand(table), key, value));
     }
   }
-  table->element[indx].key = calloc(strlen(key) + 1, sizeof(char));
+  table->element[indx].key = (char *)calloc(strlen(key) + 1, sizeof(char));
   if (table->element[indx].key == NULL) {
     printf("Problem with calloc for key\n");
     hashtable_free(table);
@@ -91,7 +92,7 @@ hashtable *hashtable_insert(hashtable *table, const char *key, size_t value) {
   }
   table->element[indx].value = value;
   size_t key_length = strlen(key);
-  strlcpy(table->element[indx].key, key, key_length+1);
+  strlcpy(table->element[indx].key, key, key_length + 1);
   return table;
 }
 
@@ -103,7 +104,8 @@ int hashtable_checkkey(hashtable *table, const char *key) {
   if (key == NULL) {
     return 0;
   }
-  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size; ++indx) {
+  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size;
+       ++indx) {
     if (table->element[indx].key == NULL) {
       return 0;
     }
@@ -116,10 +118,11 @@ int hashtable_checkkey(hashtable *table, const char *key) {
 
 // get value by key
 size_t hashtable_get(hashtable *table, const char *key) {
-  //if (!hashtable_checkkey(table, key)) {
-  //  return 0;
-  //}
-  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size; ++indx) {
+  // if (!hashtable_checkkey(table, key)) {
+  //   return 0;
+  // }
+  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size;
+       ++indx) {
     if (!strcmp(table->element[indx].key, key)) {
       return table->element[indx].value;
     }
@@ -132,7 +135,8 @@ int hashtable_modify(hashtable *table, const char *key, size_t new_value) {
   if (!hashtable_checkkey(table, key)) {
     return 0;
   }
-  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size; ++indx) {
+  for (size_t indx = hash(key, strlen(key)) % table->size; indx < table->size;
+       ++indx) {
     if (!strcmp(table->element[indx].key, key)) {
       table->element[indx].value = new_value;
       return 1;
