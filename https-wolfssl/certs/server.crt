@@ -1,0 +1,87 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            1d:0e:fe:51:73:20:25:22:b2:be:03:43:08:ce:fe:ae
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=inpoisk.com
+        Validity
+            Not Before: Sep 14 09:10:03 2024 GMT
+            Not After : Dec 18 09:10:03 2026 GMT
+        Subject: CN=test_server
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:bc:8c:00:b3:1f:f4:6c:5a:d6:67:0f:17:c0:cd:
+                    e6:ed:d5:60:b6:46:86:aa:65:35:b9:a9:eb:b4:bc:
+                    55:35:e6:e7:3a:ab:36:14:8c:32:f3:be:08:ae:66:
+                    b4:05:af:dc:ef:44:8e:6c:eb:01:6a:f0:f3:83:27:
+                    04:23:fe:a1:ce:b8:38:b0:7c:1a:fc:e6:6e:f3:14:
+                    47:ae:f7:20:a4:5d:81:ed:a1:8a:8a:37:20:1f:a1:
+                    f1:5c:5e:63:5d:df:c1:6e:5a:c2:6b:48:aa:5c:fc:
+                    0c:82:15:4a:fe:8c:2f:7f:65:65:90:f6:ed:1a:ed:
+                    df:02:eb:d8:19:6f:84:40:75:03:e1:28:84:00:0c:
+                    48:8a:7d:90:c7:36:05:f2:f7:6a:c8:35:a3:46:80:
+                    de:60:1b:86:21:9c:4a:3b:bd:a9:e2:db:1a:ba:96:
+                    1e:b5:b4:ec:4a:0d:d3:3f:8f:c4:87:3d:8b:5b:bc:
+                    fc:89:9d:86:aa:28:e5:23:82:da:1a:f9:02:c5:38:
+                    eb:3d:c5:44:58:fe:2f:4e:7b:a6:9c:5c:d0:94:7e:
+                    11:7b:e2:bf:59:a4:b1:b8:68:3f:82:b0:d8:0c:bb:
+                    6d:2e:a8:f2:28:9f:c6:bd:52:24:d6:39:f4:1e:2d:
+                    48:38:c6:cb:fa:ee:33:e0:93:9d:df:3e:fa:52:2c:
+                    f8:f5
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                45:4B:B2:F2:18:EC:D4:C5:70:68:76:E2:A4:3F:39:DC:C8:92:2F:BC
+            X509v3 Authority Key Identifier: 
+                keyid:30:D9:50:14:53:EA:0E:C9:71:31:C6:30:D0:6C:79:D8:5C:27:07:17
+                DirName:/CN=inpoisk.com
+                serial:0F:14:53:DA:16:14:B2:22:89:1A:C9:2F:A1:10:72:A0:54:B6:69:33
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Subject Alternative Name: 
+                DNS:test_server
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        52:01:3b:71:47:b8:70:1b:b5:76:2e:31:8d:3a:3c:d9:77:c5:
+        90:9a:af:64:2e:bd:ce:9c:e8:f5:b9:6c:6c:84:45:eb:42:fa:
+        83:00:a6:1e:ca:26:a0:1b:d1:18:6d:74:db:35:31:a2:b7:34:
+        3d:e2:5a:bb:97:44:ec:1e:a2:83:2e:69:70:2e:4b:6a:ca:ed:
+        cb:3c:cc:c4:1b:c8:01:8e:f7:40:ce:43:ec:55:cf:fa:29:bb:
+        82:fe:26:15:a8:50:6b:a4:4d:5d:2f:32:6d:93:c2:f7:63:32:
+        b2:3b:67:0f:d8:77:59:dc:bb:d5:d9:b2:94:36:a2:7e:cb:55:
+        39:a6:be:5e:d7:49:f3:d1:b2:a7:75:fd:79:4e:97:d0:17:ca:
+        05:4f:9c:27:ea:07:01:9f:64:38:2c:f9:a2:33:c3:33:23:ca:
+        0b:09:9a:a2:8e:cb:70:db:91:8c:60:9f:fa:ff:a6:0b:aa:50:
+        56:a1:1e:ea:d6:fe:dc:b6:0b:a7:cc:1b:3d:f7:77:4a:82:bf:
+        0e:0d:83:03:d3:d5:96:9b:9f:12:cc:56:43:7b:fe:87:b5:e8:
+        f0:26:e6:e8:01:d4:2c:01:26:4d:bd:e7:85:d4:ec:70:d7:1b:
+        fd:f1:ac:c5:af:4c:e4:e5:ab:47:70:3b:6a:bb:bd:d1:c1:5b:
+        5e:38:30:de
+-----BEGIN CERTIFICATE-----
+MIIDcTCCAlmgAwIBAgIQHQ7+UXMgJSKyvgNDCM7+rjANBgkqhkiG9w0BAQsFADAW
+MRQwEgYDVQQDDAtpbnBvaXNrLmNvbTAeFw0yNDA5MTQwOTEwMDNaFw0yNjEyMTgw
+OTEwMDNaMBYxFDASBgNVBAMMC3Rlc3Rfc2VydmVyMIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEAvIwAsx/0bFrWZw8XwM3m7dVgtkaGqmU1uanrtLxVNebn
+Oqs2FIwy874Irma0Ba/c70SObOsBavDzgycEI/6hzrg4sHwa/OZu8xRHrvcgpF2B
+7aGKijcgH6HxXF5jXd/BblrCa0iqXPwMghVK/owvf2VlkPbtGu3fAuvYGW+EQHUD
+4SiEAAxIin2QxzYF8vdqyDWjRoDeYBuGIZxKO72p4tsaupYetbTsSg3TP4/Ehz2L
+W7z8iZ2GqijlI4LaGvkCxTjrPcVEWP4vTnumnFzQlH4Re+K/WaSxuGg/grDYDLtt
+LqjyKJ/GvVIk1jn0Hi1IOMbL+u4z4JOd3z76Uiz49QIDAQABo4G6MIG3MAkGA1Ud
+EwQCMAAwHQYDVR0OBBYEFEVLsvIY7NTFcGh24qQ/OdzIki+8MFEGA1UdIwRKMEiA
+FDDZUBRT6g7JcTHGMNBsedhcJwcXoRqkGDAWMRQwEgYDVQQDDAtpbnBvaXNrLmNv
+bYIUDxRT2hYUsiKJGskvoRByoFS2aTMwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYD
+VR0PBAQDAgWgMBYGA1UdEQQPMA2CC3Rlc3Rfc2VydmVyMA0GCSqGSIb3DQEBCwUA
+A4IBAQBSATtxR7hwG7V2LjGNOjzZd8WQmq9kLr3OnOj1uWxshEXrQvqDAKYeyiag
+G9EYbXTbNTGitzQ94lq7l0TsHqKDLmlwLktqyu3LPMzEG8gBjvdAzkPsVc/6KbuC
+/iYVqFBrpE1dLzJtk8L3YzKyO2cP2HdZ3LvV2bKUNqJ+y1U5pr5e10nz0bKndf15
+TpfQF8oFT5wn6gcBn2Q4LPmiM8MzI8oLCZqijstw25GMYJ/6/6YLqlBWoR7q1v7c
+tgunzBs993dKgr8ODYMD09WWm58SzFZDe/6HtejwJuboAdQsASZNveeF1Oxw1xv9
+8azFr0zk5atHcDtqu73RwVteODDe
+-----END CERTIFICATE-----
