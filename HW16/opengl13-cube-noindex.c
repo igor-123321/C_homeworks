@@ -36,7 +36,6 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 
 #define BUFFSIZE 8000
 
-
 GLfloat mixValue = 0.2f;
 
 void key_callback(GLFWwindow * window, int key, int scancode, int action, int mode){
@@ -55,7 +54,6 @@ void key_callback(GLFWwindow * window, int key, int scancode, int action, int mo
 }
 
 const GLuint WIDTH = 800, HEIGHT = 600;
-
 
 int main(){
 
@@ -165,7 +163,6 @@ int main(){
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
    };
     
-
     GLuint VBO, VAO;
 
     glGenVertexArrays(1, &VAO);
@@ -185,7 +182,6 @@ int main(){
 
     //glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-
 
     // Load and create a texture1 and 2 
     GLuint texture1, texture2;
@@ -222,9 +218,21 @@ int main(){
 
     glEnable(GL_DEPTH_TEST);
 
+
+    mat4 model = GLM_MAT4_IDENTITY_INIT; 
+    mat4 view = GLM_MAT4_IDENTITY_INIT; 
+    mat4 projection = GLM_MAT4_IDENTITY_INIT;
+
+    glmc_rotate(model, glm_rad(-55), (vec3){1.0f, 0.0f, 0.0f});
+    glmc_translate(view, (vec3){0, 0, -3.0f});
+    glmc_perspective(glm_rad(45), (GLfloat)WIDTH/(GLfloat)HEIGHT, 0.1f, 100.0f, projection);
+    
+    GLuint transformLoc = glGetUniformLocation(shaderProgram, "model");
+    GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
+    GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+   
     while(!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -238,30 +246,17 @@ int main(){
 
         glUniform1f(glGetUniformLocation(shaderProgram, "mixCoeff"), mixValue);
 
+        glmc_rotate(model, (GLfloat)glfwGetTime() * glm_rad(50), (vec3){0.5f, 0.3f, -0.5f});
 
-        mat4 model = GLM_MAT4_IDENTITY_INIT; 
-        mat4 view = GLM_MAT4_IDENTITY_INIT; 
-        mat4 projection = GLM_MAT4_IDENTITY_INIT;
-
-        glmc_rotate(model, glm_rad(-55), (vec3){1.0f, 0.0f, 0.0f});
-        glmc_translate(view, (vec3){0, 0, -3.0f});
-        glmc_perspective(glm_rad(45), (GLfloat)WIDTH/(GLfloat)HEIGHT, 0.1f, 100.0f, projection);
-
-        glmc_rotate(model, (GLfloat)glfwGetTime() * glm_rad(50), (vec3){0.5f, 1.0f, 0.0f});
-        GLuint transformLoc = glGetUniformLocation(shaderProgram, "model");
-        GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
-        GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, (GLfloat *)(model));
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (GLfloat *)(view));
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, (GLfloat *)(projection));
 
-        
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glBindVertexArray(0);
-
 
         glfwSwapBuffers(window);
     }
